@@ -1,4 +1,4 @@
-package clientsRegistration;
+package phoneRechargesAPI.paymentRecord;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-class ClientNotFoundAdvice {
+public class PaymentNotFoundAdvice {
 
     @ResponseBody
-    @ExceptionHandler(ClientNotFoundException.class)
+    @ExceptionHandler(PaymentNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String clientNotFoundHandler(ClientNotFoundException ex) {
+    String clientNotFoundHandler(PaymentNotFoundException ex) {
         return ex.getMessage();
     }
 

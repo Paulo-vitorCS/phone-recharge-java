@@ -1,4 +1,4 @@
-package clientsRegistration;
+package phoneRechargesAPI.clientsRegistration;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 

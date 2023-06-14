@@ -1,14 +1,13 @@
-package clientsRegistration;
+package phoneRechargesAPI.clientsRegistration;
+
+import jakarta.persistence.*;
 
 import jakarta.persistence.GeneratedValue;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 
 import java.util.Objects;
 
 @Entity
+@Table(name="CLIENTS")
 public class Client {
 
     private @Id @GeneratedValue Long id;
@@ -96,7 +95,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client {" + "id: " + this.id + ", First Name: " + this.firstName + ", Last Name: " + this.lastName +
+        return "Client {id: " + this.id + ", First Name: " + this.firstName + ", Last Name: " + this.lastName +
                 ", CPF: " + this.cpf + ", Phone Number: " + this.phoneNumber + "}";
     }
 

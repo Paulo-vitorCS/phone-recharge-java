@@ -1,4 +1,4 @@
-package clientsRegistration;
+package phoneRechargesAPI.clientsRegistration;
 
 import java.util.List;
 import java.util.stream.Collectors;

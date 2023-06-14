@@ -1,4 +1,4 @@
-package clientsRegistration;
+package phoneRechargesAPI.clientsRegistration;
 
 class ClientNotFoundException extends RuntimeException {
 
