@@ -1,5 +1,6 @@
-package phoneRechargesAPI.paymentRecord;
+package br.com.phoneRecharges.exceptions;
 
+import br.com.phoneRecharges.exceptions.ClientNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -7,12 +8,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class PaymentNotFoundAdvice {
+public class ClientNotFoundAdvice {
 
     @ResponseBody
-    @ExceptionHandler(PaymentNotFoundException.class)
+    @ExceptionHandler(ClientNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String clientNotFoundHandler(PaymentNotFoundException ex) {
+    String clientNotFoundHandler(ClientNotFoundException ex) {
         return ex.getMessage();
     }
 

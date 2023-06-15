@@ -1,14 +1,15 @@
-package phoneRechargesAPI;
+package br.com.phoneRecharges.app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import phoneRechargesAPI.clientsRegistration.Client;
-import phoneRechargesAPI.clientsRegistration.ClientRepository;
-import phoneRechargesAPI.paymentRecord.Payment;
-import phoneRechargesAPI.paymentRecord.PaymentRepository;
+import br.com.phoneRecharges.domain.Client;
+import br.com.phoneRecharges.repositories.ClientRepository;
+import br.com.phoneRecharges.domain.Payment;
+import br.com.phoneRecharges.repositories.PaymentRepository;
 
 @Configuration
 class LoadDatabase {
@@ -26,6 +27,7 @@ class LoadDatabase {
             clientRepository.findAll().forEach(client -> log.info("Preloaded " + client));
 
             paymentRepository.save(new Payment(firstClient, "5242 1351 3541 9217", "Joao Costa", "30/11/2025", 353));
+            paymentRepository.save(new Payment(secondClient, "5405 7201 1902 8424", "Maria Silva", "12/05/2027", 311));
             paymentRepository.save(new Payment(secondClient, "5405 7201 1902 8424", "Maria Silva", "12/05/2027", 311));
 
             paymentRepository.findAll().forEach(payment -> {

@@ -1,10 +1,14 @@
-package phoneRechargesAPI.paymentRecord;
+package br.com.phoneRecharges.controllers;
 
+import br.com.phoneRecharges.assemblers.PaymentModelAssembler;
+import br.com.phoneRecharges.domain.Payment;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
+import br.com.phoneRecharges.exceptions.PaymentNotFoundException;
+import br.com.phoneRecharges.repositories.PaymentRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +30,7 @@ public class PaymentController {
     // Aggregate root
     // tag::get-aggregate-root[]
     @GetMapping("/payments")
-    CollectionModel<EntityModel<Payment>> all() {
+    public CollectionModel<EntityModel<Payment>> all() {
         List<EntityModel<Payment>> payments = paymentRepository.findAll().stream()
                 .map(assembler::toModel)
                 .collect(Collectors.toList());
@@ -48,7 +52,7 @@ public class PaymentController {
     // Single item
 
     @GetMapping("/payments/{id}")
-    EntityModel<Payment> one(@PathVariable Long id) {
+    public EntityModel<Payment> one(@PathVariable Long id) {
         Payment payment = paymentRepository.findById(id).orElseThrow(() -> new PaymentNotFoundException(id));
 
         return assembler.toModel(payment);

@@ -1,6 +1,5 @@
-package phoneRechargesAPI.paymentRecord;
+package br.com.phoneRecharges.domain;
 
-import phoneRechargesAPI.clientsRegistration.Client;
 import jakarta.persistence.*;
 
 import java.text.ParseException;

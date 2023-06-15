@@ -1,8 +1,8 @@
-package phoneRechargesAPI.paymentRecord;
+package br.com.phoneRecharges.exceptions;
 
 public class PaymentNotFoundException extends RuntimeException{
 
-    PaymentNotFoundException(Long id) {
+    public PaymentNotFoundException(Long id) {
         super("Could not find payment " + id + "\n");
     }
 

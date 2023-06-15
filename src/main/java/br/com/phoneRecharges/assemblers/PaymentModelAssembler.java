@@ -1,13 +1,15 @@
-package phoneRechargesAPI.paymentRecord;
+package br.com.phoneRecharges.assemblers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
+import br.com.phoneRecharges.controllers.PaymentController;
+import br.com.phoneRecharges.domain.Payment;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 @Component
-class PaymentModelAssembler implements RepresentationModelAssembler<Payment, EntityModel<Payment>> {
+public class PaymentModelAssembler implements RepresentationModelAssembler<Payment, EntityModel<Payment>> {
 
     @Override
     public EntityModel<Payment> toModel(Payment payment) {

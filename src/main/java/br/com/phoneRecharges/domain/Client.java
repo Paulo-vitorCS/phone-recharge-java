@@ -1,4 +1,4 @@
-package phoneRechargesAPI.clientsRegistration;
+package br.com.phoneRecharges.domain;
 
 import jakarta.persistence.*;
 
