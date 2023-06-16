@@ -13,10 +13,7 @@ public class Payment {
 
     private @Id @GeneratedValue Long id;
 
-    @ManyToOne
-    @JoinColumn(name="client_id", nullable = false)
-    private Client client;
-
+    private Long clientId;
     private String cardNumber;
     private String cardHolder;
     private Date cardExpiringDate;
@@ -24,9 +21,9 @@ public class Payment {
 
     public Payment() {}
 
-    public Payment(Client client, String cardNumber, String cardHolder, String cardExpiringDate, int cvv) throws ParseException {
+    public Payment(Long clientId, String cardNumber, String cardHolder, String cardExpiringDate, int cvv) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        this.client = client;
+        this.clientId = clientId;
         this.cardNumber = cardNumber;
         this.cardHolder = cardHolder;
         this.cardExpiringDate = formatter.parse(cardExpiringDate);
@@ -41,12 +38,12 @@ public class Payment {
         this.id = id;
     }
 
-    public Client getClient() {
-        return client;
+    public Long getClientId () {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(Long ClientId) {
+        this.clientId = ClientId;
     }
 
     public String getCardNumber() {
@@ -90,21 +87,20 @@ public class Payment {
             return false;
 
         Payment payment = (Payment) o;
-        return Objects.equals(this.id, payment.id) && Objects.equals(this.client, payment.client) &&
+        return Objects.equals(this.id, payment.id) && Objects.equals(this.clientId, payment.clientId) &&
                 Objects.equals(this.cardNumber, payment.cardNumber) && Objects.equals(this.cardHolder, payment.cardHolder) &&
                 Objects.equals(this.cardExpiringDate, payment.cardExpiringDate) && Objects.equals(this.cvv, payment.cvv);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.client, this.cardNumber,
+        return Objects.hash(this.id, this.clientId, this.cardNumber,
                 this.cardHolder, this.cardExpiringDate, this.cvv);
     }
 
     @Override
     public String toString() {
-        return "Payment: {id: " + this.id + ",\n" +
-               this.client + "}";
+        return "Payment: {id: " + this.id + ", clientId: " + this.clientId + "}";
     }
 
 }

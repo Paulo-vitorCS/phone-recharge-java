@@ -2,6 +2,9 @@ package br.com.phoneRecharges.controllers;
 
 import br.com.phoneRecharges.assemblers.PaymentModelAssembler;
 import br.com.phoneRecharges.domain.Payment;
+import br.com.phoneRecharges.exceptions.ClientNotFoundException;
+import br.com.phoneRecharges.repositories.ClientRepository;
+import jakarta.validation.constraints.Null;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +24,12 @@ public class PaymentController {
 
     private final PaymentRepository paymentRepository;
     private final PaymentModelAssembler assembler;
+    private final ClientRepository clientRepository;
 
-    public PaymentController(PaymentRepository paymentRepository, PaymentModelAssembler assembler) {
+    public PaymentController(PaymentRepository paymentRepository, PaymentModelAssembler assembler, ClientRepository clientRepository) {
         this.paymentRepository = paymentRepository;
         this.assembler = assembler;
+        this.clientRepository = clientRepository;
     }
 
     // Aggregate root
@@ -42,11 +47,17 @@ public class PaymentController {
 
     @PostMapping("/payments")
     ResponseEntity<?> newPayment(@RequestBody Payment newPayment) {
-        EntityModel<Payment> entityModel = assembler.toModel(paymentRepository.save(newPayment));
+        if (clientRepository.findById(newPayment.getClientId()).isEmpty()) {
 
-        return ResponseEntity
-                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
-                .body(entityModel);
+            throw new ClientNotFoundException(newPayment.getClientId());
+        } else {
+
+            EntityModel<Payment> entityModel = assembler.toModel(paymentRepository.save(newPayment));
+
+            return ResponseEntity
+                    .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                    .body(entityModel);
+        }
     }
 
     // Single item
@@ -61,7 +72,7 @@ public class PaymentController {
     @PutMapping("/payments/{id}")
     ResponseEntity<?> replacePayment(@RequestBody Payment newPayment, @PathVariable Long id) {
         Payment updatedPayment = paymentRepository.findById(id).map(payment -> {
-            payment.setClient(newPayment.getClient());
+            payment.setClientId(newPayment.getClientId());
             payment.setCardNumber(newPayment.getCardNumber());
             payment.setCardHolder(newPayment.getCardHolder());
             payment.setCardExpiringDate(newPayment.getCardExpiringDate());

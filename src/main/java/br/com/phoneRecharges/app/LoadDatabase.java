@@ -29,9 +29,9 @@ class LoadDatabase {
 
             clientRepository.findAll().forEach(client -> log.info("Preloaded " + client));
 
-            Payment firstPayment = new Payment(firstClient, "5242 1351 3541 9217", "Joao Costa", "30/11/2025", 353);
-            Payment sndPayment = new Payment(secondClient, "5405 7201 1902 8424", "Maria Silva", "12/05/2027", 311);
-            Payment trdPayment = new Payment(secondClient, "5405 7201 1902 8424", "Maria Silva", "12/05/2027", 311);
+            Payment firstPayment = new Payment(firstClient.getId(), "5242 1351 3541 9217", "Joao Costa", "30/11/2025", 353);
+            Payment sndPayment = new Payment(secondClient.getId(), "5405 7201 1902 8424", "Maria Silva", "12/05/2027", 311);
+            Payment trdPayment = new Payment(secondClient.getId(), "5405 7201 1902 8424", "Maria Silva", "12/05/2027", 311);
 
             paymentRepository.save(firstPayment);
             paymentRepository.save(sndPayment);
