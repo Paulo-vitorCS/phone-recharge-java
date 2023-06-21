@@ -10,8 +10,6 @@ import java.util.Collections;
 
 @SpringBootApplication
 @ComponentScan("br.com.consumerPhoneRechargesAPI")
-@EnableWebSocket
-@EnableWebSocketMessageBroker
 public class ConsumerApiApplication {
 
     public static void main(String... args) {
@@ -19,7 +17,6 @@ public class ConsumerApiApplication {
         app.setDefaultProperties(Collections
                 .singletonMap("server.port", "8081"));
         app.run(args);
-        //SpringApplication.run(ConsumerApiApplication.class, args);
     }
 
 }

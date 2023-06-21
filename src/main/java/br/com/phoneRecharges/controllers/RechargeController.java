@@ -2,7 +2,6 @@ package br.com.phoneRecharges.controllers;
 
 import br.com.phoneRecharges.assemblers.RechargeModelAssembler;
 import br.com.phoneRecharges.domain.Recharge;
-import br.com.phoneRecharges.exceptions.PaymentNotFoundException;
 import br.com.phoneRecharges.exceptions.RechargeNotFoundException;
 import br.com.phoneRecharges.repositories.RechargeRepository;
 import br.com.phoneRecharges.services.RechargeService;
@@ -11,7 +10,13 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;

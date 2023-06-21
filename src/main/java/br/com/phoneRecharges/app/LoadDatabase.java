@@ -1,13 +1,11 @@
 package br.com.phoneRecharges.app;
 
 import br.com.phoneRecharges.domain.Recharge;
-import br.com.phoneRecharges.enums.Status;
 import br.com.phoneRecharges.repositories.RechargeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import br.com.phoneRecharges.domain.Client;
 import br.com.phoneRecharges.repositories.ClientRepository;

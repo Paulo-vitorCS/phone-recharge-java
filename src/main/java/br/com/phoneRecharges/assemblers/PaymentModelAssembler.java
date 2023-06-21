@@ -1,6 +1,7 @@
 package br.com.phoneRecharges.assemblers;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 import br.com.phoneRecharges.controllers.PaymentController;
 import br.com.phoneRecharges.domain.Payment;

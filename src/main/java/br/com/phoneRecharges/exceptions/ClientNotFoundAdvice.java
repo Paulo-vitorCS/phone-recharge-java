@@ -1,6 +1,5 @@
 package br.com.phoneRecharges.exceptions;
 
-import br.com.phoneRecharges.exceptions.ClientNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
