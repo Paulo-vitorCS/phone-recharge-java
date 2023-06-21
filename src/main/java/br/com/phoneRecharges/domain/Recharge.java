@@ -28,14 +28,12 @@ public class Recharge {
 
     public Recharge() {}
 
-    public Recharge(Client client, Payment payment, double rechargeValue, String rechargeDate, Status status) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
+    public Recharge(Client client, Payment payment, double rechargeValue) throws ParseException {
         this.client = client;
         this.payment = payment;
         this.rechargeValue = rechargeValue;
-        this.rechargeDate = formatter.parse(rechargeDate);
-        this.status = status;
+        this.rechargeDate = new Date();
+        this.status = Status.WAITING;
     }
 
     public Long getId() {

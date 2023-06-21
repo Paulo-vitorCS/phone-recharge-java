@@ -41,9 +41,9 @@ class LoadDatabase {
                 log.info("Preloaded " + payment.getId());
             });
 
-            rechargeRepository.save(new Recharge(firstClient, firstPayment, 40.00, "14/06/2023 11:36:07", Status.APPROVED));
-            rechargeRepository.save(new Recharge(secondClient, sndPayment, 30.00, "14/06/2023 13:23:18", Status.REFUSED));
-            rechargeRepository.save(new Recharge(secondClient, trdPayment, 20.00, "14/06/2023 13:29:24", Status.APPROVED));
+            rechargeRepository.save(new Recharge(firstClient, firstPayment, 40.00));
+            rechargeRepository.save(new Recharge(secondClient, sndPayment, 30.00));
+            rechargeRepository.save(new Recharge(secondClient, trdPayment, 20.00));
 
             rechargeRepository.findAll().forEach(recharge -> {
                 log.info("Preloaded " + recharge);

@@ -5,6 +5,8 @@ import br.com.phoneRecharges.domain.Recharge;
 import br.com.phoneRecharges.exceptions.PaymentNotFoundException;
 import br.com.phoneRecharges.exceptions.RechargeNotFoundException;
 import br.com.phoneRecharges.repositories.RechargeRepository;
+import br.com.phoneRecharges.services.RechargeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -22,6 +24,9 @@ public class RechargeController {
 
     private final RechargeRepository rechargeRepository;
     private final RechargeModelAssembler assembler;
+
+    @Autowired
+    private RechargeService rechargeService;
 
     public RechargeController(RechargeRepository rechargeRepository, RechargeModelAssembler assembler) {
         this.rechargeRepository = rechargeRepository;
@@ -43,7 +48,7 @@ public class RechargeController {
 
     @PostMapping("/recharges")
     ResponseEntity<?> newRecharge(@RequestBody Recharge newRecharge) {
-        EntityModel<Recharge> entityModel = assembler.toModel(rechargeRepository.save(newRecharge));
+        EntityModel<Recharge> entityModel = assembler.toModel(rechargeService.save(newRecharge));
 
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
