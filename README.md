@@ -6,7 +6,7 @@ No contexto das telecomunicações o papel dos dispositivos móveis ocupa lugar 
   - Cadastro de recarga
   - Realizar uma recarga
   - Listar recargas anteriores do cliente
-  - 
+
 ## Tecnologias
 O projeto foi desenvolvido com as seguintes tecnologias:
   - [Java | -v 20.0.1](https://www.oracle.com/java/technologies/downloads/#java20)
