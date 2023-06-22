@@ -1,11 +1,26 @@
 # Phone Recharges API
 No contexto das telecomunicações o papel dos dispositivos móveis ocupa lugar de destaque, milhares de usuários diariamente realizam recargas nos seus dispositivos, tal processo que deve ser rápido e simples. O intuito do projeto é criar uma solução para dispositivos móveis de recargas de celular, com o foco na API desta solução. A solução foi implementada na linguagem Java, utilizando RESTful na construção da API.
 
-#### Funcionalidades
-  - Cadastro de cliente
-  - Cadastro de recarga
-  - Realizar uma recarga
-  - Listar recargas anteriores do cliente
+## Funcionalidades
+  - [x] **Cadastro de clientes**
+    - Rotas: http://localhost:8080
+      - Get: /clients | /clients/{id}
+      - Post: /clients
+      - Put: /clients/{id}
+      - Delete: /clients/{id}
+  - [x] **Cadastro de pagamentos**
+    - Rotas: http://localhost:8080
+      - Get: /payments | /payments/{id}
+      - Post: /payments
+      - Put: /payments/{id}
+      - Delete: /payments/{id}
+  - [x] **Realizar uma recarga**
+    - Rotas: http://localhost:8080
+      - Get: /recharges | /recharges/{id}
+      - Post: /recharges
+      - Put: /recharges/{id}
+      - Delete: /recharges/{id}
+  - [ ] Listar recargas anteriores do cliente
 
 ## Tecnologias
 O projeto foi desenvolvido com as seguintes tecnologias:
@@ -20,6 +35,8 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 ## Pontos Importantes
 Como o propósito dessa atividade é de exercício, abstraiu-se a segurança das interfaces, considerando todas as chamadas para essas interfaces como autorizadas, ou seja, todas as recargas serão aprovadas.
 Foram implementadas duas API's, sendo a primeira para cadastro de cliente, pagamento e recarga. A segunda recebe a solicitação de recarga e a aprova, enviando uma mensagem para primeira para atualização de status.
+
+As chamadas de testes à aplicação foram feitas utilizando o Postman e esporadicamente o CURL.
 
 ## URL's da aplicação
 Ao rodar a aplicação, as seguintes URL's podem ser uteis:
