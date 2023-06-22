@@ -2,7 +2,11 @@ package br.com.phoneRecharges.controllers;
 
 import br.com.phoneRecharges.assemblers.RechargeModelAssembler;
 import br.com.phoneRecharges.domain.Recharge;
+import br.com.phoneRecharges.exceptions.ClientNotFoundException;
+import br.com.phoneRecharges.exceptions.PaymentNotFoundException;
 import br.com.phoneRecharges.exceptions.RechargeNotFoundException;
+import br.com.phoneRecharges.repositories.ClientRepository;
+import br.com.phoneRecharges.repositories.PaymentRepository;
 import br.com.phoneRecharges.repositories.RechargeRepository;
 import br.com.phoneRecharges.services.RechargeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +32,18 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class RechargeController {
 
     private final RechargeRepository rechargeRepository;
+    private final ClientRepository clientRepository;
+    private final PaymentRepository paymentRepository;
     private final RechargeModelAssembler assembler;
 
     @Autowired
     private RechargeService rechargeService;
 
-    public RechargeController(RechargeRepository rechargeRepository, RechargeModelAssembler assembler) {
+    public RechargeController(RechargeRepository rechargeRepository, ClientRepository clientRepository,
+                              PaymentRepository paymentRepository, RechargeModelAssembler assembler) {
         this.rechargeRepository = rechargeRepository;
+        this.clientRepository = clientRepository;
+        this.paymentRepository = paymentRepository;
         this.assembler = assembler;
     }
 
@@ -53,11 +62,17 @@ public class RechargeController {
 
     @PostMapping("/recharges")
     ResponseEntity<?> newRecharge(@RequestBody Recharge newRecharge) {
-        EntityModel<Recharge> entityModel = assembler.toModel(rechargeService.save(newRecharge));
+        if (paymentRepository.findById(newRecharge.getPaymentId()).isEmpty()) {
+            throw new PaymentNotFoundException(newRecharge.getPaymentId());
+        } else if (clientRepository.findById(newRecharge.getClientId()).isEmpty()) {
+            throw new ClientNotFoundException(newRecharge.getClientId());
+        } else {
+            EntityModel<Recharge> entityModel = assembler.toModel(rechargeService.save(newRecharge));
 
-        return ResponseEntity
-                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
-                .body(entityModel);
+            return ResponseEntity
+                    .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                    .body(entityModel);
+        }
     }
 
     // Single item
@@ -72,8 +87,8 @@ public class RechargeController {
     @PutMapping("/recharges/{id}")
     ResponseEntity<?> replaceRecharge(@RequestBody Recharge newRecharge, @PathVariable Long id) {
         Recharge updatedRecharge = rechargeRepository.findById(id).map(recharge -> {
-            recharge.setClient(newRecharge.getClient());
-            recharge.setPayment(newRecharge.getPayment());
+            recharge.setClientId(newRecharge.getClientId());
+            recharge.setPaymentId(newRecharge.getPaymentId());
             recharge.setRechargeValue(newRecharge.getRechargeValue());
             recharge.setRechargeDate(newRecharge.getRechargeDate());
             recharge.setStatus(newRecharge.getStatus());

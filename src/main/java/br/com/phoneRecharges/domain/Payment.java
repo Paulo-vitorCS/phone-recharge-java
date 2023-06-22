@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Column;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +17,8 @@ public class Payment {
 
     private @Id @GeneratedValue Long id;
 
-    private Long clientId;
+    @Column(nullable = false)
+    private Long clientId = null;
     private String cardNumber;
     private String cardHolder;
     private Date cardExpiringDate;

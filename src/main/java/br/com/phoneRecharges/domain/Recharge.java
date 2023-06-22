@@ -5,8 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Column;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -18,13 +17,11 @@ public class Recharge {
 
     private @Id @GeneratedValue Long id;
 
-    @ManyToOne
-    @JoinColumn(name="client_id")
-    private Client client;
+    @Column(nullable = false)
+    private Long clientId;
 
-    @ManyToOne
-    @JoinColumn(name="payment_id", nullable = false)
-    private Payment payment;
+    @Column(nullable = false)
+    private Long paymentId;
 
     private double rechargeValue;
     private Date rechargeDate;
@@ -32,9 +29,9 @@ public class Recharge {
 
     public Recharge() {}
 
-    public Recharge(Client client, Payment payment, double rechargeValue) throws ParseException {
-        this.client = client;
-        this.payment = payment;
+    public Recharge(Long clientId, Long paymentId, double rechargeValue) throws ParseException {
+        this.clientId = clientId;
+        this.paymentId = paymentId;
         this.rechargeValue = rechargeValue;
         this.rechargeDate = new Date();
         this.status = Status.WAITING;
@@ -48,20 +45,20 @@ public class Recharge {
         this.id = id;
     }
 
-    public Client getClient() {
-        return client;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public Long getPaymentId() {
+        return paymentId;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
     }
 
     public double getRechargeValue() {
@@ -97,21 +94,21 @@ public class Recharge {
             return false;
 
         Recharge recharge = (Recharge) o;
-        return Objects.equals(this.id, recharge.id) && Objects.equals(this.client, recharge.client) &&
-                Objects.equals(this.payment, recharge.payment) && Objects.equals(this.rechargeValue, recharge.rechargeValue) &&
+        return Objects.equals(this.id, recharge.id) && Objects.equals(this.clientId, recharge.clientId) &&
+                Objects.equals(this.paymentId, recharge.paymentId) && Objects.equals(this.rechargeValue, recharge.rechargeValue) &&
                 Objects.equals(this.rechargeDate, recharge.rechargeDate) && Objects.equals(this.status, recharge.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.client, this.payment,
+        return Objects.hash(this.id, this.clientId, this.paymentId,
                 this.rechargeValue, this.rechargeDate, this.status);
     }
 
     @Override
     public String toString() {
-        return "Recharge: {id: " + this.id + ", client: " + this.client.getName() +
-                ", Phone Number: " + this.client.getPhoneNumber() + "}";
+        return "Recharge: {id: " + this.id + ", clientId: " + this.clientId +
+                ", paymentId: " + this.paymentId + "}";
     }
 
 }

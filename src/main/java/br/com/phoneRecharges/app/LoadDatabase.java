@@ -39,9 +39,9 @@ class LoadDatabase {
                 log.info("Preloaded " + payment.getId());
             });
 
-            rechargeRepository.save(new Recharge(firstClient, firstPayment, 40.00));
-            rechargeRepository.save(new Recharge(secondClient, sndPayment, 30.00));
-            rechargeRepository.save(new Recharge(secondClient, trdPayment, 20.00));
+            rechargeRepository.save(new Recharge(firstClient.getId(), firstPayment.getId(), 40.00));
+            rechargeRepository.save(new Recharge(secondClient.getId(), sndPayment.getId(), 30.00));
+            rechargeRepository.save(new Recharge(secondClient.getId(), trdPayment.getId(), 20.00));
 
             rechargeRepository.findAll().forEach(recharge -> {
                 log.info("Preloaded " + recharge);
