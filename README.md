@@ -38,6 +38,13 @@ Foram implementadas duas API's, sendo a primeira para cadastro de cliente, pagam
 
 As chamadas de testes à aplicação foram feitas utilizando o Postman e esporadicamente o CURL.
 
+Como as duas aplicações (API's) deveriam estar em projetos separados, mas foram construídos apenas separados por pacotes, o arquivo pom.xml exigiu dois Profiles (perfis), `one` e `two`, para que os jars das aplicações fossem gerados corretamente. Os comandos usados para gerá-los, foram, respectivamente:
+```bash
+mvn clean
+mvn package -P one
+mvn package -P two
+```
+
 ## URL's da aplicação
 Ao rodar a aplicação, as seguintes URL's podem ser uteis:
   - Banco de Dados H2: http://localhost:8080/h2
