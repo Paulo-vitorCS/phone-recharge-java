@@ -1,0 +1,5 @@
+FROM openjdk:20
+LABEL authors="paulovs"
+COPY target/phone-recharges-ConsumerAPI.jar api2.jar
+ENTRYPOINT ["java", "-jar", "/api2.jar"]
+EXPOSE 8050

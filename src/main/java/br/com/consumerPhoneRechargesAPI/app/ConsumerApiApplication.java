@@ -15,7 +15,7 @@ public class ConsumerApiApplication {
     public static void main(String... args) {
         SpringApplication app = new SpringApplication(ConsumerApiApplication.class);
         app.setDefaultProperties(Collections
-                .singletonMap("server.port", "8081"));
+                .singletonMap("server.port", "8050"));
         app.run(args);
     }
 
